@@ -1,10 +1,10 @@
 # PREDRIVE AI
 
-Research MVP for a driver monitoring PWA connected to a Python backend. The current backend validates incoming frames and returns `NOT_EVALUATED` (`mock-v0`); it does not contain or run a driver-state AI model and does not store images.
+PREDRIVE AI là dự án nghiên cứu thử nghiệm ứng dụng PWA kết nối với backend Python để giám sát tài xế. Backend hiện kiểm tra các khung hình gửi lên và trả về trạng thái `NOT_EVALUATED` (`mock-v0`). Dự án **chưa tích hợp mô hình AI** để nhận diện tình trạng tài xế và không lưu ảnh/video.
 
-## Run the project on Windows
+## Chạy dự án trên Windows
 
-Install backend dependencies once:
+Cài backend một lần:
 
 ```powershell
 cd backend
@@ -13,7 +13,7 @@ python -m venv .venv
 cd ..
 ```
 
-Install frontend dependencies once:
+Cài frontend một lần:
 
 ```powershell
 cd frontend
@@ -21,16 +21,27 @@ npm.cmd ci
 cd ..
 ```
 
-Start both services from the project root:
+Từ thư mục gốc, khởi động frontend và backend cùng lúc:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\start-dev.ps1
 ```
 
-Open `http://127.0.0.1:5173/`. The API listens on port 8000 and the frontend connects to it using the current page hostname. To run backend checks, use `backend\.venv\Scripts\python.exe -m pytest backend\tests -q`.
+Mở giao diện tại [http://127.0.0.1:5173](http://127.0.0.1:5173). Frontend gọi API tại cổng `8000` và kết nối tới backend theo hostname hiện tại. Chạy kiểm thử backend bằng lệnh:
 
-## Scope and safety
+```powershell
+backend\.venv\Scripts\python.exe -m pytest backend\tests -q
+```
 
-This is a development prototype, not a certified driving-safety system. Test only with recorded/simulated content or consenting participants while the vehicle is stationary. Camera access on phones requires HTTPS; public deployment also requires WSS, user authentication, authorization, and appropriate privacy controls. Do not commit secrets, `.env` files, or private driver imagery.
+## Phạm vi và an toàn
 
-See [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md), [BACKEND_CONTEXT.md](BACKEND_CONTEXT.md), [FRONTEND_CONTEXT.md](FRONTEND_CONTEXT.md), and [docs/api-contract.md](docs/api-contract.md) for project and interface details.
+Đây là bản thử nghiệm, **không phải thiết bị an toàn giao thông đã được chứng nhận**. Chỉ thử bằng video ghi sẵn, dữ liệu mô phỏng hoặc người tham gia đã đồng ý khi phương tiện đang đứng yên. Trình duyệt trên điện thoại yêu cầu HTTPS để truy cập camera. Nếu triển khai công khai, cần HTTPS/WSS, xác thực và phân quyền người dùng cùng các biện pháp bảo vệ quyền riêng tư phù hợp.
+
+Không đưa bí mật, file `.env` hoặc hình ảnh riêng tư của tài xế lên Git.
+
+## Tài liệu
+
+- [Tổng quan dự án](PROJECT_CONTEXT.md)
+- [Tài liệu backend](BACKEND_CONTEXT.md)
+- [Tài liệu frontend](FRONTEND_CONTEXT.md)
+- [Quy ước API](docs/api-contract.md)
